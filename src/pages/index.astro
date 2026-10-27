@@ -1,0 +1,295 @@
+---
+import '../styles/global.css';
+
+const products = [
+  { id: 'sudo-mugg', name: 'Sudo-mugg', price: 119, category: 'Skrivbord', art: 'mug', label: 'För högre behörighet vid kaffemaskinen.' },
+  { id: 'kabel', name: 'Kabel för allt', price: 49, category: 'Support', art: 'cable', label: 'En kabel. Orimligt många möjligheter.' },
+  { id: 'troja', name: 'Deploy fredag-tröja', price: 249, category: 'Kläder', art: 'shirt', label: 'För dig som gillar lite spänning.' },
+  { id: 'access', name: 'Produktionsaccess', price: 9, category: 'Support', art: 'key', label: 'Ett symboliskt stort ansvar.' },
+  { id: 'block', name: 'Incidentblock', price: 79, category: 'Skrivbord', art: 'notebook', label: 'För allt som absolut inte skulle hända.' },
+  { id: 'duck', name: 'Rubber duck', price: 89, category: 'Support', art: 'duck', label: 'En kollega som faktiskt lyssnar.' },
+  { id: 'strumpor', name: 'Standup-strumpor', price: 129, category: 'Kläder', art: 'socks', label: 'Tar dig igenom ännu ett kort möte.' },
+  { id: '404', name: '404-kopp - ej hittad', price: 404, category: 'Skrivbord', art: 'missing', label: 'Vi har letat. Den finns inte.', unavailable: true },
+];
+const filters = ['Alla', 'Skrivbord', 'Support', 'Kläder'];
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#183c3b" />
+    <meta name="description" content="Teknikforum – små verktyg och stora idéer för folk som felsöker." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <title>Teknikforum – saker för folk som felsöker</title>
+  </head>
+  <body>
+    <div class="announcement">Intern frakt: 0 kr. Förväntad leveranstid: när backloggen tillåter.</div>
+    <header class="site-header">
+      <div class="header-inner wrap">
+        <a class="wordmark" href="#top" aria-label="Teknikforum, till startsidan">teknik<span>forum</span><i>.</i></a>
+        <nav aria-label="Huvudmeny">
+          <a class="nav-active" href="#butiken">Butiken</a>
+          <a href="#forumet">Forumet</a>
+        </nav>
+        <button class="cart-trigger" type="button" aria-haspopup="dialog" aria-controls="cart-panel">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2 10h10.5l2-7H6M9 19a1 1 0 1 0 0 .01M17 19a1 1 0 1 0 0 .01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Varukorg</span><span class="cart-count" aria-label="0 varor i varukorgen">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span> IT-avdelningens interna hörna</p>
+          <h1 id="hero-title">Saker för folk som <em>felsöker.</em></h1>
+          <p class="hero-description">Små verktyg, stora idéer och oförklarligt många USB-C-kablar. Välkommen till IT-avdelningens alldeles egna lilla förråd.</p>
+          <a class="primary-button" href="#butiken">Öppna förrådet <span aria-hidden="true">↗</span></a>
+          <div class="hero-note"><span class="note-spark">✳</span><span>Utvalt av IT.<br /><strong>För alla som kan starta om.</strong></span></div>
+        </div>
+        <div class="hero-art" aria-label="Illustration av en anteckningsbok, penna och klistermärke" role="img">
+          <div class="art-blob"></div><div class="art-grid"></div>
+          <div class="art-star star-one">✳</div><div class="art-star star-two">✦</div>
+          <div class="art-caption">BRA GREJER FÖR<br />DIGITALA DAGAR <span>↘</span></div>
+          <div class="hero-notebook">
+            <div class="notebook-binding"></div><div class="notebook-tape"></div>
+            <div class="notebook-small">ANTECKNINGAR &amp; ANNAT</div>
+            <div class="notebook-title">IT<br /><em>Forum</em><span>.</span></div>
+            <div class="notebook-lines"><span></span><span></span><span></span></div>
+            <div class="notebook-bottom">IDÉER / BUGGAR / KAFFE</div>
+          </div>
+          <div class="hero-pencil"></div>
+          <div class="hero-sticker"><span>HAR DU TESTAT</span><strong>att starta<br />om?</strong><span>FRÅGA ÅT EN VÄN</span></div>
+          <div class="art-index">FIG. 01 — KREATIVT KAOS</div>
+        </div>
+      </section>
+
+      <div class="ticker" aria-hidden="true"><div>GJORT FÖR VARDAGEN <span>✳</span> GODKÄNT AV IT <span>✳</span> FUNKAR PÅ MIN DATOR <span>✳</span> GJORT FÖR VARDAGEN <span>✳</span> GODKÄNT AV IT <span>✳</span> FUNKAR PÅ MIN DATOR <span>✳</span></div></div>
+
+      <section class="shop wrap" id="butiken" aria-labelledby="shop-title">
+        <div class="section-heading">
+          <div><p class="eyebrow"><span class="section-number">01 /</span> DET LILLA FÖRRÅDET</p><h2 id="shop-title">Utrustning för<br /><em>vardagens IT.</em></h2></div>
+          <p>En noga utvald samling nödvändigheter, nästan-nödvändigheter och saker som bara gör dagen lite roligare.</p>
+        </div>
+        <div class="filter-row">
+          <div class="filters" aria-label="Filtrera produkter">
+            {filters.map((filter) => <button type="button" class:list={['filter-button', { active: filter === 'Alla' }]} data-filter={filter} aria-pressed={filter === 'Alla'}>{filter}</button>)}
+          </div>
+          <span class="product-count">8 UTVALDA FAVORITER</span>
+        </div>
+        <div class="product-grid">
+          {products.map((product, index) => (
+            <article class="product-card" data-category={product.category}>
+              <div class:list={['product-image', `art-${product.art}`]} aria-hidden="true">
+                <span class="product-index">TF / 0{index + 1}</span>
+                <span class="product-doodle doodle-one">✳</span><span class="product-doodle doodle-two">✦</span>
+                <div class="product-illustration">
+                  {product.art === 'mug' && <><div class="cup-handle"></div><div class="cup-body"><span>sudo<br />coffee_</span></div><div class="cup-steam">﹋</div></>}
+                  {product.art === 'cable' && <><div class="cable-loop"></div><div class="cable-end end-one"></div><div class="cable-end end-two"></div></>}
+                  {product.art === 'shirt' && <div class="shirt-shape"><span>DEPLOY<br /><b>FREDAG</b><br />? !</span></div>}
+                  {product.art === 'key' && <><div class="key-ring"></div><div class="key-shaft"></div><div class="key-tag">PROD<br /><b>ACCESS</b></div></>}
+                  {product.art === 'notebook' && <div class="mini-notebook"><span>OJ DÅ.</span><small>INCIDENT<br />LOGG / 001</small><i></i></div>}
+                  {product.art === 'duck' && <><div class="duck-body"></div><div class="duck-head"><i></i></div><div class="duck-beak"></div><div class="duck-wing"></div></>}
+                  {product.art === 'socks' && <><div class="sock sock-one"><span>OOO</span></div><div class="sock sock-two"><span>BRB</span></div></>}
+                  {product.art === 'missing' && <><div class="missing-cup"><span>404</span></div><div class="missing-mark">?</div></>}
+                </div>
+                {product.unavailable && <span class="missing-label">EJ I LAGER (ELLER?)</span>}
+              </div>
+              <div class="product-info">
+                <div class="product-meta"><span>{product.category}</span><span>0{index + 1} / 08</span></div>
+                <div class="product-title"><h3>{product.name}</h3><span>{product.price} kr</span></div>
+                <p>{product.label}</p>
+                {product.unavailable ? (
+                  <div class="unavailable-wrap" role="button" tabindex="0" aria-label={`${product.name}: visa information om otillgänglig produkt`}>
+                    <button class="add-button unavailable" type="button" disabled>Hittades inte <span aria-hidden="true">↗</span></button>
+                  </div>
+                ) : (
+                  <button class="add-button" type="button" data-id={product.id} data-name={product.name} data-price={product.price}>Lägg i korgen <span aria-hidden="true">↗</span></button>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="forum wrap" id="forumet">
+        <div class="forum-stamp" aria-hidden="true">TF<span>✳</span>IRL</div>
+        <div><p class="eyebrow">02 / MER ÄN BARA PRYLAR</p><h2>Vi löser det <em>tillsammans.</em></h2><p>Teknikforum är vår lilla hörna för stora frågor, smarta lösningar och ett och annat omstartsskämt.</p></div>
+        <span class="forum-signoff">INTERNT SEDAN<br /><strong>ALLTID.</strong> ↗</span>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="wrap footer-inner"><a class="wordmark" href="#top">teknik<span>forum</span><i>.</i></a><p>För människor bakom maskinerna. <span>♥</span></p><span class="footer-end">SLUT PÅ SIDAN / INTE PÅ IDÉERNA</span></div></footer>
+
+    <div class="cart-layer" hidden>
+      <div class="cart-overlay"></div>
+      <aside class="cart-panel" id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1">
+        <div class="cart-header"><div><p class="eyebrow">DITT LILLA FÖRRÅD</p><h2 id="cart-title">Din varukorg<span>.</span></h2></div><button class="close-cart" type="button" aria-label="Stäng varukorgen">×</button></div>
+        <div class="cart-content"><p class="cart-empty">Korgen är lika tom som dokumentationen.</p><ul class="cart-items" aria-label="Varor i varukorgen"></ul></div>
+        <div class="cart-footer">
+          <div class="tip-heading"><div><strong>Dricks till IT</strong><p>Även supportåterbäring uppskattas.</p></div><span>FRIVILLIGT, SÅKLART</span></div>
+          <div class="tip-buttons" aria-label="Välj dricks">
+            <button type="button" data-tip="5" aria-pressed="false">5 %</button><button type="button" data-tip="10" aria-pressed="false">10 %</button><button type="button" data-tip="15" aria-pressed="false">15 %</button><button type="button" data-tip="custom" class="active" aria-pressed="true">Valfritt</button>
+          </div>
+          <label class="tip-input-label" for="custom-tip">Valfri dricks i procent <span>(minus går också bra)</span></label>
+          <div class="tip-input-wrap"><input id="custom-tip" type="number" step="any" value="0" inputmode="decimal" /><span>%</span></div>
+          <p class="tip-error" role="alert" hidden>Ange en giltig procentsats som ger en beräkningsbar totalsumma.</p>
+          <div class="subtotal-row"><span>Varusumma</span><span class="subtotal">0 kr</span></div>
+          <div class="total-row"><strong>Totalt</strong><strong class="total">0 kr</strong></div>
+          <button class="checkout-button" type="button">Skapa ärende <span aria-hidden="true">↗</span></button>
+          <p class="cart-disclaimer">Ingen riktig beställning. Bara god stämning.</p>
+        </div>
+      </aside>
+    </div>
+    <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+      type CartItem = { id: string; name: string; price: number; quantity: number };
+      const cart: CartItem[] = [];
+      const layer = document.querySelector<HTMLElement>('.cart-layer')!;
+      const panel = document.querySelector<HTMLElement>('.cart-panel')!;
+      const trigger = document.querySelector<HTMLButtonElement>('.cart-trigger')!;
+      const closeButton = document.querySelector<HTMLButtonElement>('.close-cart')!;
+      const items = document.querySelector<HTMLUListElement>('.cart-items')!;
+      const empty = document.querySelector<HTMLElement>('.cart-empty')!;
+      const count = document.querySelector<HTMLElement>('.cart-count')!;
+      const subtotalElement = document.querySelector<HTMLElement>('.subtotal')!;
+      const totalElement = document.querySelector<HTMLElement>('.total')!;
+      const tipInput = document.querySelector<HTMLInputElement>('#custom-tip')!;
+      const tipError = document.querySelector<HTMLElement>('.tip-error')!;
+      const checkout = document.querySelector<HTMLButtonElement>('.checkout-button')!;
+      const tipButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-tip]')];
+      const toast = document.querySelector<HTMLElement>('.toast')!;
+      const currency = new Intl.NumberFormat('sv-SE', { maximumFractionDigits: 2 });
+      let toastTimer: ReturnType<typeof setTimeout>;
+
+      function notify(message: string) {
+        clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.classList.add('visible');
+        toastTimer = setTimeout(() => toast.classList.remove('visible'), 3000);
+      }
+
+      function selectTip(value: string) {
+        tipButtons.forEach((button) => {
+          const active = button.dataset.tip === value;
+          button.classList.toggle('active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+      }
+
+      function renderCart() {
+        items.replaceChildren();
+        let quantity = 0;
+        let subtotal = 0;
+        cart.forEach((item) => {
+          quantity += item.quantity;
+          subtotal += item.price * item.quantity;
+          const row = document.createElement('li');
+          row.className = 'cart-item';
+          const info = document.createElement('div');
+          const name = document.createElement('strong');
+          name.textContent = item.name;
+          const detail = document.createElement('span');
+          detail.textContent = `${item.quantity} × ${currency.format(item.price)} kr`;
+          info.append(name, detail);
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.textContent = 'Ta bort';
+          remove.setAttribute('aria-label', `Ta bort ${item.name} ur varukorgen`);
+          remove.addEventListener('click', () => {
+            cart.splice(cart.indexOf(item), 1);
+            renderCart();
+          });
+          row.append(info, remove);
+          items.append(row);
+        });
+        count.textContent = String(quantity);
+        count.setAttribute('aria-label', `${quantity} ${quantity === 1 ? 'vara' : 'varor'} i varukorgen`);
+        empty.hidden = cart.length > 0;
+        subtotalElement.textContent = `${currency.format(subtotal)} kr`;
+        const tip = tipInput.value === '' && tipInput.validity.valid ? 0 : tipInput.valueAsNumber;
+        const total = subtotal * (1 + tip / 100);
+        const valid = tipInput.validity.valid && Number.isFinite(tip) && Number.isFinite(total);
+        tipError.hidden = valid;
+        tipInput.setAttribute('aria-invalid', String(!valid));
+        checkout.disabled = !valid;
+        totalElement.textContent = valid ? `${currency.format(total)} kr` : '–';
+      }
+
+      document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((button) => {
+        button.addEventListener('click', () => {
+          document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((filter) => {
+            const active = filter === button;
+            filter.classList.toggle('active', active);
+            filter.setAttribute('aria-pressed', String(active));
+          });
+          document.querySelectorAll<HTMLElement>('.product-card').forEach((card) => {
+            card.hidden = button.dataset.filter !== 'Alla' && card.dataset.category !== button.dataset.filter;
+          });
+        });
+      });
+
+      document.querySelectorAll<HTMLButtonElement>('.add-button[data-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const { id, name, price } = button.dataset;
+          if (!id || !name || !price) return;
+          const existing = cart.find((item) => item.id === id);
+          if (existing) existing.quantity += 1;
+          else cart.push({ id, name, price: Number(price), quantity: 1 });
+          renderCart();
+          notify(`${name} ligger i korgen. Bra val!`);
+        });
+      });
+      const unavailable = document.querySelector<HTMLElement>('.unavailable-wrap')!;
+      const unavailableNotice = () => notify('404-koppen kunde tyvärr inte hittas.');
+      unavailable.addEventListener('click', unavailableNotice);
+      unavailable.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          unavailableNotice();
+        }
+      });
+
+      function closeCart() {
+        layer.hidden = true;
+        document.body.classList.remove('cart-open');
+        trigger.focus();
+      }
+      trigger.addEventListener('click', () => {
+        layer.hidden = false;
+        document.body.classList.add('cart-open');
+        closeButton.focus();
+      });
+      closeButton.addEventListener('click', closeCart);
+      document.querySelector('.cart-overlay')!.addEventListener('click', closeCart);
+      document.addEventListener('keydown', (event) => {
+        if (layer.hidden) return;
+        if (event.key === 'Escape') closeCart();
+        if (event.key === 'Tab') {
+          const focusable = [...panel.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex="-1"])')];
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      });
+      tipButtons.forEach((button) => button.addEventListener('click', () => {
+        const value = button.dataset.tip!;
+        selectTip(value);
+        if (value === 'custom') tipInput.focus();
+        else { tipInput.value = value; renderCart(); }
+      }));
+      tipInput.addEventListener('input', () => {
+        const value = tipInput.value;
+        selectTip(['5', '10', '15'].includes(value) ? value : 'custom');
+        renderCart();
+      });
+      checkout.addEventListener('click', () => notify('Ärendet är skapat! (Nästan. Det här är bara en demo.)'));
+      renderCart();
+    </script>
+  </body>
+</html>
